@@ -40,7 +40,8 @@ def search_who(question):
     pages = []
     for a in info:
         pages.append(re.findall("[A-Z][a-z]+\s[A-Z][a-z]+",a))
-    #print possible_results
+        #pages.append(re.findall("[A-Z][a-z]+\s([A-Z][a-z]+\s)?[A-Z][a-z]+",a))
+    #print pages
     
     for p in pages:#list of lists
         for peep in p:
@@ -53,8 +54,12 @@ def search_who(question):
                     people[peep]+= 1;
                     
     #print people.keys();
+    #for p in people.keys():
+    #    print p
+    #    print people.get(p,None)
+
     print max(people, key=people.get)
 
 
 if __name__ == "__main__":
-    search_who("who played batman")
+    search_who("who plays barney on how i met your mother")
