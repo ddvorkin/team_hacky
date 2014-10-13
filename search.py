@@ -65,8 +65,13 @@ def search_who(question):
     #    print p
     #    print people.get(p,None)
 
-    print max(people, key=people.get)
+    return max(people, key=people.get)
 
+def search_who_list(question):
+    g = google.search(question,num=5,stop=5)
+    info = []
+    htmls = [x for x in g]
+    return htmls
 
 def search_where(question):
     g = google.search(question,num=2,stop=2)
@@ -92,14 +97,14 @@ def search_where(question):
                     places[place] = 1
                 else:
                     places[place]+= 1
-    print places.keys()
+    #print places.keys()
 
     #for p in places.keys():
     #    print p
     #    print places.get(p,None)
-    print max(places, key=places.get)
+    return max(places, key=places.get)
 
 
 if __name__ == "__main__":
-    search_who("who played batman")
-    search_where("where is the effiel tower")
+    print search_who("who played batman")
+    print search_where("where is the effiel tower")
