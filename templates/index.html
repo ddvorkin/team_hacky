@@ -4,7 +4,7 @@
 class="uk-active"
 {% endblock active_home %}
 
-{% block search_about %}
+{% block main %}
     <div class="uk-grid">
       <div class="uk-width-medium-1-3 uk-container-center uk-text-center">
         <div class="uk-panel">
@@ -12,8 +12,8 @@ class="uk-active"
             <form method="POST" class="uk-form uk-form-stacked">
       			<div class="uk-form-row"><input type="text" name="search" placeholder="Search"></div>
     			<div class="uk-form-row">
-    				<button class="uk-button" type="submit" name="search" value="search"> Search </button>
-    				<button class="uk-button" type="submit" name="lucky" value="lucky"> I'm Feeling Lucky </button>
+            <button class="uk-button" type="submit" name="s" value="search"> Search </button>
+    				<button class="uk-button" type="submit" name="s" value="lucky"> I'm Feeling Lucky </button>
     			</div>
 
     		</form>
@@ -21,4 +21,4 @@ class="uk-active"
         </div>
       </div>
     </div>
-{% endblock search_about %}
+{% endblock main %}
