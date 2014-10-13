@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Team-Hacky</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='uikit-2.11.0/css/uikit.almost-flat.css') }}" type="text/css"/>
+    <style type="text/css">
+    	html{
+    		background-image: url('static/gplaypattern.png');
+    		background-repeat: repeat;
+    	}
+    </style>
+  </head>
+  <body>
+  	<nav class="uk-navbar">
+  		<div class="uk-navbar-brand"><span class="uk-icon-search"></span> Team Hacky</div>
+    	<ul class="uk-navbar-nav">
+        	<li {% block active_home %}{% endblock active_home %}><a href="/">Home</a></li>
+        	<li {% block active_about %}{% endblock active_about %}><a href="/about">About</a></li>
+    	</ul>
+	</nav>
+    {% block main %}
+    {% endblock main %}
+  </body>
+</html>
