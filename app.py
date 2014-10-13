@@ -1,4 +1,4 @@
-import google, re, datesearch
+import google, re, datasearch
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
@@ -13,11 +13,11 @@ def index():
 		query = request.form['search']
 
 		if re.search("when", query, re.I) != None:
-			output = datesearch.search_date(query)
+			output = datasearch.search_date(query)
 		if re.search("who", query, re.I) != None:
-			output = datesearch.search_who(query)
+			output = datasearch.search_who(query)
 		if re.search("where", query, re.I) != None:
-			output = datesearch.search_where(query)
+			output = datasearch.search_where(query)
 		
 		if button == "search":
 			return render_template("index.html", result=output)

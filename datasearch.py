@@ -86,7 +86,7 @@ def search_date(query):
     
 
 def search_who(question):
-    g = google.search(question,num=5,stop=5)
+    g = search(question,num=5,stop=5)
     info = []
     htmls = [x for x in g]
     for url in htmls:
@@ -121,13 +121,13 @@ def search_who(question):
     return max(people, key=people.get)
 
 def search_who_list(question):
-    g = google.search(question,num=5,stop=5)
+    g = search(question,num=5,stop=5)
     info = []
     htmls = [x for x in g]
     return htmls
 
 def search_where(question):
-    g = google.search(question,num=2,stop=2)
+    g = search(question,num=2,stop=2)
     info = []
     htmls = [x for x in g]
     for url in htmls:
@@ -159,6 +159,6 @@ def search_where(question):
 
 if __name__=="__main__":
     #print search_date("When was the attack on pearl harbor?")
-    print search_date("when was d day")
-    print search_who("who played batman")   
-    print search_where("where is the effiel tower")
+    #print search_date("when was d day")
+    #print search_who("who played batman")   
+    print search_where("where is the eiffel tower")
