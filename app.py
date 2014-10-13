@@ -11,10 +11,10 @@ def index():
 	else:
 		button = request.form['s']
 		if button == "search":
-			return render_template("result.html", result="searched")
+			return render_template("index.html", result="searched")
 			print "here"
 		if button == "lucky":
-			return render_template("result.html",result="lucky")
+			return render_template("index.html",result="lucky")
 
 
 @app.route("/about")
