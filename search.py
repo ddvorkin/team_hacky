@@ -4,19 +4,57 @@ import google
 import re
 
 
-g = google.search("Who played Chase on House",lang='en',num=2,start=0,stop=2,pause=2.0)
-#help(google.search)
+#stream to read our first names file
+stream2 = open("firstnames.csv",'r')
+read2 = stream2.read().replace("\n"," ")
+stream2.close()
 
-htmls = [x for x in g]
+firstDic = {}
+firstNames = read2.split() #all first names via our database
+firstDic = dict.fromkeys(firstNames, firstNames)
+   
+#stream to read surnames file
+stream3 = open("surnames.csv",'r')
+read3 = stream3.read().replace("\n"," ")
+stream3.close()
 
-info = []
+surnameList = []
+surnameDic = {}
+surnames = read3.split()
+#setting up surname dictionary
+for a in surnames:
+    surnameDic[a.title()] = a.title()
 
-for url in htmls:
-    #print url
-    u = urlopen(url)
-    item = BeautifulSoup(u.read())
+def search_who(question):
+    g = google.search(question,num=5,stop=5)
+    info = []
+    htmls = [x for x in g]
+    for url in htmls:
+        u = urlopen(url)
+        item = BeautifulSoup(u.read())
+        item = item.get_text().replace("\n"," ")
+        info.append(item)
+    #print info
+
+    people = {}
+    pages = []
+    for a in info:
+        pages.append(re.findall("[A-Z][a-z]+\s[A-Z][a-z]+",a))
+    #print possible_results
     
-    info.append(item.get_text().replace("\n"," "))
+    for p in pages:#list of lists
+        for peep in p:
+            #print peep
+            firstLast= peep.split()#"Angela Lin" -> ["Angela","Lin"]
+            if firstLast[0] in firstDic and firstLast[1] in surnameDic:
+                if peep not in people.keys():
+                    people[peep] = 1;
+                else:
+                    people[peep]+= 1;
+                    
+    #print people.keys();
+    print max(people, key=people.get)
 
 
-print info
+if __name__ == "__main__":
+    search_who("who played batman")
