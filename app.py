@@ -1,4 +1,4 @@
-import google
+import google, re, datesearch
 from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
@@ -10,11 +10,19 @@ def index():
 		return render_template("index.html")
 	else:
 		button = request.form['s']
+		query = request.form['search']
+
+		if re.search("when", query, re.I) != None:
+			output = datesearch.search_date(query)
+		if re.search("who", query, re.I) != None:
+			output = datesearch.search_who(query)
+		if re.search("where", query, re.I) != None:
+			output = datesearch.search_where(query)
+		
 		if button == "search":
-			return render_template("index.html", result="searched")
-			print "here"
+			return render_template("index.html", result=output)
 		if button == "lucky":
-			return render_template("index.html",result="lucky")
+			return render_template("index.html",result=output)
 
 
 @app.route("/about")
