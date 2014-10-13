@@ -16,7 +16,7 @@ def verify_date(d):
 
 def search_date(query):
 
-    #Date formats: MM/DD/YYYY | Aug 5, 2014 | 20 July 1980
+    #Date formats: Aug 5, 2014 | 20 July 1980
     g = search(query,num=2,stop=2)
 
     results = []
@@ -41,12 +41,14 @@ def search_date(query):
                 else:
                     dates[date] += 1
 
+    ''' 
     print dates.keys()
     for date in dates.keys():
         if dates[date] > 2:
             print date + " " + str(dates[date])
-
+    '''
     return max(dates, key=dates.get)
 
 if __name__=="__main__":
-    print search_date("When was the attack on pearl harbor?")
+    #print search_date("When was the attack on pearl harbor?")
+    print search_date("when was the declaration of independence signed")
