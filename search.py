@@ -4,11 +4,11 @@ import google
 import re
 
 stream1 = open("countries.csv","r");
-read1 = stream1.read().replace("\n"," ");
+read1 = stream1.read()
 stream1.close();
 countries = {}
-countries = dict.fromkeys(read1.split(),0);
-#print countries
+countries = dict.fromkeys(read1.split("\n"),0);
+#print countries.keys()
 
 #stream to read our first names file
 stream2 = open("firstnames.csv",'r')
@@ -56,9 +56,9 @@ def search_who(question):
             firstLast= peep.split()#"Angela Lin" -> ["Angela","Lin"]
             if firstLast[0] in firstDic.keys() and firstLast[1] in surnameDic.keys():
                 if peep not in people.keys():
-                    people[peep] = 1;
+                    people[peep] = 1
                 else:
-                    people[peep]+= 1;
+                    people[peep]+= 1
                     
     #print people.keys();
     #for p in people.keys():
@@ -68,5 +68,38 @@ def search_who(question):
     print max(people, key=people.get)
 
 
+def search_where(question):
+    g = google.search(question,num=2,stop=2)
+    info = []
+    htmls = [x for x in g]
+    for url in htmls:
+        u = urlopen(url)
+        item = BeautifulSoup(u.read())
+        item = item.get_text().replace("\n"," ")
+        info.append(item)
+    #print info
+
+    places = {}
+    pages = []
+    for a in info:
+        pages.append(re.findall("[A-Z][a-z]+",a))
+
+    for p in pages:#list of lists
+        for place in p:
+            if place in countries.keys():
+                #print place
+                if place not in places.keys():
+                    places[place] = 1
+                else:
+                    places[place]+= 1
+    print places.keys()
+
+    #for p in places.keys():
+    #    print p
+    #    print places.get(p,None)
+    print max(places, key=places.get)
+
+
 if __name__ == "__main__":
-    search_who("who plays batman")
+    search_who("who played batman")
+    search_where("where is the effiel tower")
