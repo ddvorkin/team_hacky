@@ -127,11 +127,14 @@ def search_who(question):
 
     return max(people, key=people.get)
 
-def search_who_list(question):
+def search_list(question):
     g = search(question,num=5,stop=5)
-    info = []
-    htmls = [x for x in g]
-    return htmls
+    ret = ""
+    for x in g:
+        ret =  ret + x  + "\n"
+    ret = "Here are links associated with '" + question + "':\n" + ret
+    #print ret
+    return ret
 
 def search_where(question):
     g = search(question,num=2,stop=2)
@@ -171,8 +174,8 @@ def search_where(question):
     #    print places.get(p,None)
     return max(places, key=places.get)
 
-if __name__=="__main__":
+#if __name__=="__main__":
     #print search_date("When was the attack on pearl harbor?")
     #print search_date("when was d day")
-    #print search_who("who played batman")   
-    print search_where("where is the grand canyon")
+    #print search_list("who played batman")   
+    #print search_where("where is the grand canyon")

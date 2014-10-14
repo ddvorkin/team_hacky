@@ -11,18 +11,21 @@ def index():
 	else:
 		button = request.form['s']
 		query = request.form['search']
-
+                output = ""
 		if re.search("when", query, re.I) != None:
 			output = datasearch.search_date(query)
 		if re.search("who", query, re.I) != None:
 			output = datasearch.search_who(query)
 		if re.search("where", query, re.I) != None:
 			output = datasearch.search_where(query)
-		
-		if button == "search":
-			return render_template("index.html", result=output)
+                
+                if button == "search" and output == "":
+                        return render_template("index.html",result=output)        
+		if button == "search" and output != "":
+			output = datasearch.search_list(query)
+                        return render_template("index.html", result=output)
 		if button == "lucky":
-			return render_template("index.html",result=output)
+                        return render_template("index.html",result=output)
 
 
 @app.route("/about")
