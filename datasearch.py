@@ -3,6 +3,13 @@ from urllib import urlopen
 from bs4 import BeautifulSoup
 import re
 
+stream = open("state.csv","r");
+read = stream.read()
+stream.close();
+states = {}
+states = dict.fromkeys(read.split("\n"),0);
+#print states.keys()
+
 stream1 = open("countries.csv","r");
 read1 = stream1.read()
 stream1.close();
@@ -141,10 +148,17 @@ def search_where(question):
     pages = []
     for a in info:
         pages.append(re.findall("[A-Z][a-z]+",a))
-
+        pages.append(re.findall("Papua New Guinea",a))
+        pages.append(re.findall("[A-Z][a-z]+\s[A-Z][a-z]+",a))
+        pages.append(re.findall("State of Palestine",a))
+        pages.append(re.findall("Democratic Republic of Congo",a)) 
+        pages.append(re.findall("[A-Z][a-z]+\sRepublic",a)) 
+        pages.append(re.findall("[A-Z][a-z]+\sIsland(s)?",a))
+        pages.append(re.findall("Central African Republic",a))
+    #print pages
     for p in pages:#list of lists
         for place in p:
-            if place in countries.keys():
+            if place in countries.keys() or place in states.keys():
                 #print place
                 if place not in places.keys():
                     places[place] = 1
@@ -161,4 +175,4 @@ if __name__=="__main__":
     #print search_date("When was the attack on pearl harbor?")
     #print search_date("when was d day")
     #print search_who("who played batman")   
-    print search_where("where is the eiffel tower")
+    print search_where("where is the grand canyon")
