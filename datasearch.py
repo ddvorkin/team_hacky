@@ -129,12 +129,12 @@ def search_who(question):
 
 def search_list(question):
     g = search(question,num=5,stop=5)
-    ret = ""
-    for x in g:
-        ret =  ret + x  + "\n"
-    ret = "Here are links associated with '" + question + "':\n" + ret
-    #print ret
-    return ret
+    # ret = ""
+    # for x in g:
+    #     ret =  ret + x  + "\n"
+    # ret = "Here are links associated with '" + question + "':\n" + ret
+    # print ret
+    return g
 
 def search_where(question):
     g = search(question,num=2,stop=2)

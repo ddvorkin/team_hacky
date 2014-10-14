@@ -18,6 +18,11 @@ class="uk-active"
     		</form>
         <br>
         {{result}}
+        <ul class="uk-list uk-list-line">
+        {% for element in link_list %}
+          <li><a class="uk-button-link" href= {{element}} > {{element}} </a></li>
+        {% endfor %}
+        </ul>
           </div>
         </div>
       </div>

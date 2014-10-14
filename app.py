@@ -18,14 +18,13 @@ def index():
 			output = datasearch.search_who(query)
 		if re.search("where", query, re.I) != None:
 			output = datasearch.search_where(query)
-                
-                if button == "search" and output == "":
-                        return render_template("index.html",result=output)        
-		if button == "search" and output != "":
-			output = datasearch.search_list(query)
-                        return render_template("index.html", result=output)
-		if button == "lucky":
-                        return render_template("index.html",result=output)
+
+        if button == "search" and output == "":
+            return render_template("index.html",result=output)
+        if button == "search" and output != "":
+            return render_template("index.html", link_list=datasearch.search_list(query))
+        if button == "lucky":
+            return render_template("index.html",result=output)
 
 
 @app.route("/about")
